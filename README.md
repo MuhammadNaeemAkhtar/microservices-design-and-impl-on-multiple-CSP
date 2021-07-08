@@ -3,10 +3,10 @@ AWS - OCI -AZURE
 
 # APPLICATION
 
-![](./images/app.jpg)
+![](images/app.jpg)
 
 ## **1- Codicefiscale service (AWS)**
-![](/images/fiscalcode.jpg)
+![](images/fiscalcode.jpg)
 Codicefiscale is a tax code that is used in Italy in english can be written as fiscal code. Here codicefiscale service calculates the  fiscal code [(Rules to calculate fiscal code)](https://en.wikipedia.org/wiki/Italian_fiscal_code) and is developed using **KOTLIN** + **SPRING BOOT**, which interacts with mongodb as backend database.  
 We are going to deploy this microservice on AWS in the following steps:
 
@@ -59,7 +59,7 @@ Now that image of container has been created, now distribute them using the defi
 
 ## **2- Registration Service (OCI)**
 This service saves the informations regarding user in database, like registration. The steps to deploy this microservice is almost the same as in the previous microservice. But it is deployed on **OCI**.
-![](/images/register.jpg)
+![](images/register.jpg)
 
 ### **Step1: Create Cluster**
 To create the cluster in OCI, here I used terraform, in which defined all the possible parameters for authentication to **Oracle Cloud Infrastructure (OCI)**. Clone the [repository](https://github.com/oracle-terraform-modules/terraform-oci-oke) and change the parameters according to your need
@@ -230,7 +230,7 @@ then write 8.8.8.8</code>
 
 ## **3- User app service (Azure)**
 This service will call the endpoint of fiscalcode service **(AWS)** and registration service **(OCI)** 
-![](/images/userapp.jpg)
+![](images/userapp.jpg)
 
 ### **Step1: Provisioning a cluster**
 - Running the following command creates an AKS cluster that is called **polito-cluster** with the resource group **cloud-akhtar-tesina**  
