@@ -3,7 +3,7 @@ AWS - OCI -AZURE
 
 # APPLICATION
 
-![](images/app.jpg)
+![](./images/app.png)
 
 ## **1- Codicefiscale service (AWS)**
 ![](images/fiscalcode.jpg)
