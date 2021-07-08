@@ -254,7 +254,7 @@ Now that your container images are built, deploy them using a Kubernetes resourc
 - Merge the credentials of your cluster into your current Kubernetes configuration by using the az aks get-credentials command. The default Kubernetes configuration file that is updated with your cluster credentials is located within the ~/.kube/config filepath  
 <code>az aks get-credentials -g clud-akhtar-tesina -n polito-cluster</code>
 
-- Run the following commands to deploy the resources as defined in <code>/Tesina/userapp/kube</code> directory  
+- Run the following commands to deploy the resources as defined in <code>/Tesina/userapp/kube</code> directory. **Don't forget to update CF_URL and REG_URL values with external ip's of fiscalcode service and registration service respectively in file <code>/Tesina/userapp/kube/knote.yaml</code>**   
 <code>kubectl apply -f kube</code>
 
 - Get the external ip from the following command and check it in the browser with  
