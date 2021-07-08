@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: userapp
+  labels:
+    app: userapp
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: userapp
+  template:
+    metadata:
+      labels:
+        app: userapp
+    spec:
+      containers:
+        - name: userapp
+          image: mnakhtar247/userapp:0.0.1-SNAPSHOT
+          ports:
+            - containerPort: 8080
+          env:
+            - name: MONGO_URL
+              value: mongodb://mongo:27017/dev
+            - name: CF_URL
+              value: 129.159.199.135
+          imagePullPolicy: Always
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: userapp
+spec:
+  selector:
+    app: userapp
+  ports:
+    - port: 80
+      targetPort: 8080
+      nodePort: 32250
+  type: LoadBalancer

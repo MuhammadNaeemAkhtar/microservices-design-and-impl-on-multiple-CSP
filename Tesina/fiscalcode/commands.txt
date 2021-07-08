@@ -1,0 +1,26 @@
+eksctl create cluster --name=polito-cluster-1 --nodes=1 --node-type=t2.small
+
+docker build –t fiscalcode .
+
+PASSWORD=$(aws ecr get-login-password)
+ACCOUNT=$(aws sts get-caller-identity --output text --query "Account“)
+docker login -u AWS -p $PASSWORD https://$ACCOUNT.dkr.ecr.eu-west-1.amazonaws.com
+aws ecr create-repository --repository-name fiscalcode
+
+docker tag fiscalcode [fiscalcode-repository-uri]:0.0.1-SNAPSHOT
+docker push [fiscalcode-repository-uri]:1.0-SNAPSHOT
+
+
+kubectl apply -f kube
+
+
+aws ec2 describe-security-groups --filters Name=group-name,Values="*eksctl-polito-cluster-nodegroup*"  --query "SecurityGroups[*].{Name:GroupName,ID:GroupId}"
+
+
+aws ec2 authorize-security-group-ingress --protocol tcp --port 32250 --group-id sg-045d420e266e16b68 --cidr 0.0.0.0/0
+
+kubectl get nodes -o wide
+
+54.171.143.16
+
+eksctl delete cluster --name polito-cluster

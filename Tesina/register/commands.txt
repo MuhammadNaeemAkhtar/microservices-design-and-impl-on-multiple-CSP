@@ -1,0 +1,26 @@
+terraform init
+terraform apply
+
+In case of error 
+sudo nano /etc/resolv.conf -> mettere 8.8.8.8
+
+
+docker build -t register .
+
+docker logout
+
+docker login
+
+docker tag register mnakhtar247/register:0.0.1-SNAPSHOT
+
+docker push mnakhtar247/register:0.0.1-SNAPSHOT
+
+
+oci ce cluster create-kubeconfig --cluster-id ocid1.cluster.oc1.eu-frankfurt-1.aaaaaaaadbrst2dggzq6bzlnwqz77l2iern3yrwmukbtnqb3pcazkrqrorda --file kubeconfig --region eu-frankfurt-1 --token-version 2.0.0  --kube-endpoint PUBLIC_ENDPOINT
+
+
+cp . /mnt/c/Users/mu.akhtar/Dropbox (Politecnico Di Torino Studenti)/Master 2 Level/2 trimestre/Cloud Platforms and vendor solutions/Tesina/user-app/register/kube
+
+kubectl --kubeconfig kubeconfig apply -f kube
+
+kubectl --kubeconfgi kubeconfig get nodes -o wide

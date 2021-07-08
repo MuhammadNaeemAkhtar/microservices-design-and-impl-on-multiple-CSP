@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: register
+  labels:
+    app: register
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: register
+  template:
+    metadata:
+      labels:
+        app: register
+    spec:
+      containers:
+        - name: register
+          image: mnakhtar247/register:0.0.1-SNAPSHOT
+          ports:
+            - containerPort: 8081
+          env:
+            - name: MONGO_URL
+              value: mongodb://mongo:27017/dev
+          imagePullPolicy: Always
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: register
+spec:
+  selector:
+    app: register
+  ports:
+    - port: 80
+      targetPort: 8081
+      nodePort: 32250
+  type: LoadBalancer

@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cf
+  labels:
+    app: cf
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: cf
+  template:
+    metadata:
+      labels:
+        app: cf
+    spec:
+      containers:
+        - name: cf
+          image: 343937440219.dkr.ecr.eu-west-1.amazonaws.com/fiscalcode:0.0.1-SNAPSHOT
+          ports:
+            - containerPort: 8080
+          env:
+            - name: MONGO_URL
+              value: mongodb://mongo:27017/codicefiscale
+          imagePullPolicy: Always
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: cf
+spec:
+  selector:
+    app: cf
+  ports:
+    - port: 80
+      targetPort: 8080
+      nodePort: 32250
+  type: LoadBalancer

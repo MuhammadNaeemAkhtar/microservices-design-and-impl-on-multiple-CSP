@@ -1,0 +1,15 @@
+az aks create -g clud-akhtar-tesina -n polito-cluster
+
+docker build -t userapp .
+
+docker tag userapp mnakhtar247/userapp:0.0.1-SNAPSHOT
+
+docker push mnakhtar247/userapp:0.0.1-SNAPSHOT
+
+az aks get-credentials -g clud-akhtar-tesina -n polito-cluster
+
+cp . /mnt/c/Users/mu.akhtar/Dropbox (Politecnico Di Torino Studenti)/Master 2 Level/2 trimestre/Cloud Platforms and vendor solutions/Tesina/user-app/userap/kube
+
+kubectl apply -f kube
+
+kubectl get nodes -o wide
